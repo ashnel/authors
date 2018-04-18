@@ -1,0 +1,14 @@
+<h2><a [routerLink]="['/home']">Home</a></h2>
+
+<h3 *ngIf="currentAuthor">Provide a quote by {{ currentAuthor.name }}</h3>
+
+<form (submit)="addNewQuote()">
+  Quote: <br>
+  <div *ngIf="currentAuthor">
+    <input type="text" [(ngModel)]="currentAuthor.quote" name="quote" required minlength="3" #quote="ngModel">
+    <input [routerLink]="['/quotes', currentAuthor._id]" type="submit" value="Cancel">
+    <input type="submit" value="Submit">
+    <div *ngIf="!quote.valid"><p>Please enter a quote at least 3 characters long.</p></div>
+    <div *ngIf="errors"><p>{{ errors }}</p></div>
+  </div>
+</form>
